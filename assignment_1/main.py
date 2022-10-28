@@ -26,7 +26,7 @@ lengthA1 = calculate_length_of_vector(vectorA, alpha1, beta1)
 lengthB1 = calculate_length_of_vector(vectorB, alpha1, beta1)
 lengthC1 = calculate_length_of_vector(vectorC, alpha1, beta1)
 
-# Length of the feature vectors with alpha = 1 and beta = 1
+# Length of the feature vectors with alpha = 0.01 and beta = 0.5
 lengthA2 = calculate_length_of_vector(vectorA, alpha2, beta2)
 lengthB2 = calculate_length_of_vector(vectorB, alpha2, beta2)
 lengthC2 = calculate_length_of_vector(vectorC, alpha2, beta2)
@@ -36,7 +36,7 @@ angleAB1 = math.acos(dotProductAB1 / (lengthA1 * lengthB1))
 angleBC1 = math.acos(dotProductBC1 / (lengthB1 * lengthC1))
 angleAC1 = math.acos(dotProductAC1 / (lengthA1 * lengthC1))
 
-# Angles between the feature vectors with alpha = 1 and beta = 1
+# Angles between the feature vectors with alpha = 0.01 and beta = 0.5
 angleAB2 = math.acos(dotProductAB2 / (lengthA2 * lengthB2))
 angleBC2 = math.acos(dotProductBC2 / (lengthB2 * lengthC2))
 angleAC2 = math.acos(dotProductAC2 / (lengthA2 * lengthC2))
