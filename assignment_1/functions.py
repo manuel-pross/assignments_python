@@ -23,3 +23,10 @@ def calculate_length_of_vector(vector, alpha, beta):
         elif i >= 2:
             sum += pow(vector[i] * beta, 2)
     return math.sqrt(sum)
+
+
+def normalizeVector(vector, averages):
+    normalizedVector = []
+    for i in range(len(vector)):
+        normalizedVector.append(vector[i] - averages[i])
+    return normalizedVector
