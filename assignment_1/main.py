@@ -116,9 +116,11 @@ userWeights = getWeight(userVector, 5)
 
 # Generate a user profile the feature vector
 userProfile = []
+
 userProfileProcessor = generateUserProfile(userWeights, processorSpeedVec)
 userProfileDiskSize = generateUserProfile(userWeights, diskSizeVec)
 userProfileMainMemSize = generateUserProfile(userWeights, mainMemSizeVec)
+
 userProfile.append(userProfileProcessor)
 userProfile.append(userProfileDiskSize)
 userProfile.append(userProfileMainMemSize)
