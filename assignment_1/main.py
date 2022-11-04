@@ -11,6 +11,11 @@ vectorA = [3.06, 500, 6]
 vectorB = [2.68, 320, 4]
 vectorC = [2.92, 640, 6]
 
+# Feature Vectors of Attributes
+processorSpeedVec = [3.06, 2.68, 2.92]
+diskSizeVec = [500, 320, 640]
+mainMemSizeVec = [6, 4, 6]
+
 # Dot Products of the feature vectors with alpha = 1 and beta = 1
 dotProductAB1 = calculate_dot_product(vectorA, vectorB, alpha1, beta1)
 dotProductBC1 = calculate_dot_product(vectorB, vectorC, alpha1, beta1)
@@ -70,3 +75,52 @@ avgVector = [avgProcessorSpeed, avgDiskSize, avgMainMemSize]
 normalizedVectorA = normalizeVector(vectorA, avgVector)
 normalizedVectorB = normalizeVector(vectorB, avgVector)
 normalizedVectorC = normalizeVector(vectorC, avgVector)
+
+# Ein kleiner Winkel zwischen Vektoren bedeutet grundsätzlich, dass sie sich ziemlich ähnlich bzw. ziemlich ähnlich ausgerichtet sind
+#
+
+# Dot product of the normalized Vectors
+dotProductNormVecAB = calculate_dot_product(normalizedVectorA, normalizedVectorB, 1, 1)
+dotProductNormVecBC = calculate_dot_product(normalizedVectorB, normalizedVectorC, 1, 1)
+dotProductNormVecAC = calculate_dot_product(normalizedVectorA, normalizedVectorC, 1, 1)
+
+# Length of normalized Vectors
+lengthNormVecA = calculate_length_of_vector(normalizedVectorA, 1, 1)
+lengthNormVecB = calculate_length_of_vector(normalizedVectorB, 1, 1)
+lengthNormVecC = calculate_length_of_vector(normalizedVectorC, 1, 1)
+
+# Angles between the normalized Vectors
+angleNormVecAB = math.acos(dotProductNormVecAB / (lengthNormVecA * lengthNormVecB)) * (
+    180.0 / math.pi
+)
+angleNormVecBC = math.acos(dotProductNormVecBC / (lengthNormVecB * lengthNormVecC)) * (
+    180.0 / math.pi
+)
+angleNormVecAC = math.acos(dotProductNormVecAC / (lengthNormVecA * lengthNormVecC)) * (
+    180.0 / math.pi
+)
+
+# user vector
+userVector = [4.0, 2.0, 5.0]
+
+# average user rating
+averageUserRating = sum(userVector) / len(userVector)
+
+# Normalizing the vector for user ratings
+normalizedUserVec = normalizeVector(
+    userVector, [averageUserRating, averageUserRating, averageUserRating]
+)
+
+# User weights
+userWeights = getWeight(userVector, 5)
+
+# Generate a user profile the feature vector
+userProfile = []
+userProfileProcessor = generateUserProfile(userWeights, processorSpeedVec)
+userProfileDiskSize = generateUserProfile(userWeights, diskSizeVec)
+userProfileMainMemSize = generateUserProfile(userWeights, mainMemSizeVec)
+userProfile.append(userProfileProcessor)
+userProfile.append(userProfileDiskSize)
+userProfile.append(userProfileMainMemSize)
+
+print(userProfile)

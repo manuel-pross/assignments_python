@@ -30,3 +30,17 @@ def normalizeVector(vector, averages):
     for i in range(len(vector)):
         normalizedVector.append(vector[i] - averages[i])
     return normalizedVector
+
+
+def getWeight(vector, maxPossibleRank):
+    weightVector = []
+    for i in range(len(vector)):
+        weightVector.append(vector[i] / maxPossibleRank)
+    return weightVector
+
+
+def generateUserProfile(weights, features):
+    sum = 0
+    for i in range(len(weights)):
+        sum += weights[i] * features[i]
+    return sum
