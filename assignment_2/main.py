@@ -1,11 +1,17 @@
-from surprise import Dataset, SlopeOne, accuracy
-from surprise.model_selection import train_test_split
+import os
 
-data = Dataset.load_builtin('ml-100k')
+from surprise import BaselineOnly, Dataset, Reader
+from surprise.model_selection import cross_validate
 
-trainset, testset = train_test_split(data, test_size=.25)
+# path to dataset file
+file_path = os.path.expanduser("./BX_Book/BX-Book-Ratings.csv")
 
-algo = SlopeOne()
-algo.fit(trainset)
+# As we're loading a custom dataset, we need to define a reader. In the
+# movielens-100k dataset, each line has the following format:
+# 'user item rating timestamp', separated by '\t' characters.
+reader = Reader(line_format="User-ID;ISBN;Book-Rating", sep=";", skip_lines=1)
 
-print(testset.n_users)
+data = Dataset.load_from_file(file_path, reader=reader)
+
+# We can now use this dataset as we please, e.g. calling cross_validate
+cross_validate(BaselineOnly(), data, verbose=True)
